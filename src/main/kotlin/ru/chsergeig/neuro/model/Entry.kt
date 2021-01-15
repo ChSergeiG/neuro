@@ -14,6 +14,68 @@ class Entry(
     iTransmittedBytes: String
 ) {
 
+    companion object {
+        var normDate: Double = 1.0
+        var shiftDate: Double = 0.0
+        var normReceivedBytes: Double = 1.0
+        var shiftReceivedBytes: Double = 0.0
+        var normTransmittedBytes: Double = 1.0
+        var shiftTransmittedBytes: Double = 0.0
+        var normCpu: Double = 1.0
+        var shiftCpu: Double = 0.0
+
+        @JvmStatic
+        fun normalizeDate(date: Double): Double {
+            return (date - shiftDate) * normDate
+        }
+
+        @JvmStatic
+        fun deNormalizeDate(normalizedDate: Double): Double {
+            return shiftDate + normalizedDate / normDate
+        }
+
+        @JvmStatic
+        fun normalizeService(service: Double): Double {
+            return service
+        }
+
+        @JvmStatic
+        fun deNormalizeService(normalizedService: Double): Double {
+            return normalizedService
+        }
+
+        @JvmStatic
+        fun normalizeReceivedBytes(receivedBytes: Double): Double {
+            return (receivedBytes - shiftReceivedBytes) * normReceivedBytes
+        }
+
+        @JvmStatic
+        fun deNormalizeReceivedBytes(normalizedReceivedBytes: Double): Double {
+            return shiftReceivedBytes + normalizedReceivedBytes / normReceivedBytes
+        }
+
+        @JvmStatic
+        fun normalizeTransmittedBytes(transmittedBytes: Double): Double {
+            return (transmittedBytes - shiftTransmittedBytes) * normTransmittedBytes
+        }
+
+        @JvmStatic
+        fun deNormalizeTransmittedBytes(normalizedTransmittedBytes: Double): Double {
+            return shiftTransmittedBytes + normalizedTransmittedBytes / normTransmittedBytes
+        }
+
+        @JvmStatic
+        fun normalizeCpu(cpu: Double): Double {
+            return cpu
+        }
+
+        @JvmStatic
+        fun deNormalizeCpu(normalizedCpu: Double): Double {
+            return normalizedCpu
+        }
+
+    }
+
     val date: Long
     val service: Int
     val cpu: Double
